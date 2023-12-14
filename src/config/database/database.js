@@ -1,30 +1,24 @@
-const { Sequelize } = require("sequelize");
-const { envs } = require("../environments/environments");
+import { Sequelize } from 'sequelize';
+import { envs } from './../environments/environments.js';
 
-const sequelize = new Sequelize(envs.DB_URI, {
+export const sequelize = new Sequelize(envs.DB_URI, {
   logging: false,
 });
 
-const auth = async () => {
+export async function auth() {
   try {
     await sequelize.authenticate();
-    console.log("Connection has been authenticated successfully");
+    console.log('Connection has been authenticated successfully');
   } catch (error) {
     console.log(error);
   }
-};
+}
 
-const sync = async () => {
+export async function sync() {
   try {
     await sequelize.sync(); // { force: true }
-    console.log("Connection has been synchronized successfully");
+    console.log('Connection has been synchronized successfully');
   } catch (error) {
     console.log(error);
   }
-};
-
-module.exports = {
-  auth,
-  sync,
-  sequelize,
-};
+}
