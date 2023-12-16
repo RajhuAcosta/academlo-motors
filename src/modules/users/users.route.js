@@ -8,6 +8,7 @@ import {
   updateUser,
 } from './users.controller.js';
 import {
+  protectAccountOwner,
   protectRoutesWithToken,
   validateExistUser,
 } from './users.middleware.js';
@@ -24,5 +25,5 @@ router.get('/', findAllUsers);
 router
   .route('/:id')
   .get(validateExistUser, findOneUser)
-  .patch(validateExistUser, updateUser)
-  .delete(validateExistUser, deleteUser);
+  .patch(validateExistUser, protectAccountOwner, updateUser)
+  .delete(validateExistUser, protectAccountOwner, deleteUser);

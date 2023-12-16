@@ -9,11 +9,13 @@ const registerRepairSchema = z.object({
     .number({
       required_error: 'Motor number is required',
     })
-    .max(25, { message: 'Motor number is too long' }),
+    .min(999, { message: 'Motor number is too short' }),
   description: z.string({
     required_error: 'Description is required',
   }),
-  userId: z.number(),
+  userId: z.number({
+    required_error: 'User ID is required',
+  }),
 });
 
 export function validateRepairRegister(data) {

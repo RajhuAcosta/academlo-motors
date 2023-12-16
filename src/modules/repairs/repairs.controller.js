@@ -1,8 +1,9 @@
 import { RepairsServices } from './repairs.service.js';
 import { catchAsync } from '../../common/errors/catchAsync.js';
+import { validateRepairRegister } from './repairs.schema.js';
 
 export const register = catchAsync(async (req, res, next) => {
-  const { hasError, errorMessages, repairData } = validateUserRegister(
+  const { hasError, errorMessages, repairData } = validateRepairRegister(
     req.body
   );
   if (hasError) {
